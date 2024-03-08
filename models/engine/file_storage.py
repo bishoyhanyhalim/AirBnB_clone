@@ -1,9 +1,15 @@
 #!/usr/bin/python3
 import json
+from models.base_model import BaseModel
 
 class FileStorage:
     __file_path = "file.json"
     __objects={}
+    
+    class_mapping = {
+        'BaseModel': BaseModel
+    }
+
 
     def all(self):
         return FileStorage.__objects
@@ -20,18 +26,14 @@ class FileStorage:
             json.dump(objects, fl)
 
     def reload(self):
-        from models.base_model import BaseModel
-        class_mapping = {
-            'BaseModel': BaseModel
-        }
 
         try:
             with open(FileStorage.__file_path, 'r') as fl:
                 objects = json.load(fl)
                 for key, object_info in objects.items():
                     cls_name, id = key.split('.')
-                    if cls_name in class_mapping:
-                        cls = class_mapping[cls_name]
+                    if cls_name in self.class_mapping:
+                        cls = self.class_mapping[cls_name]
                         instance = cls(**object_info)
                     FileStorage.__objects[key] = instance
         except FileNotFoundError:
