@@ -21,6 +21,7 @@ class BaseModel:
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
     
     def save(self):
+        from models import storage  
         self.updated_at = datetime.now()
         storage.save()
 

@@ -2,7 +2,7 @@
 """Module that contains the entry point of the command interpreter."""
 import cmd
 import sys
-from models.__init__ import storage
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class."""
