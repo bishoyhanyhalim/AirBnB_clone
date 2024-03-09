@@ -4,6 +4,7 @@ import cmd
 import sys
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class."""
 
@@ -12,18 +13,18 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
-    
+
     def do_EOF(self, arg):
         """Exit the program using EOF (Ctrl-D)"""
         print()
         return True
-    
+
     def emptyline(self):
         """Do nothing on empty input line"""
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of a given class, saves it and prints it's id"""
+        """Creates a new instance of a given class,save it and prints its id"""
         args = arg.split()
         if not args:
             print("** class name missing **")
@@ -66,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        print_f = [] 
+        print_f = []
         if not arg:
             for name, obj in storage.all().items():
                 print_f.append(str(obj))
@@ -76,11 +77,65 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             for name, obj in storage.all().items():
-                if name.split('.')[0]  == args[0]:
+                if name.split('.')[0] == args[0]:
                     print_f.append(str(obj))
 
         print(print_f)
-     
+
+    def do_update(self, arg):
+        args = arg.split()
+        obj = storage.all()
+
+        if not args:
+            print("** class name missing **")
+            return False
+
+        elif args[0] not in storage.class_mapping:
+            print("** class doesn't exist **")
+            return False
+
+        elif len(args) == 1:
+            print("** instance id missing **")
+            return False
+
+        elif len(args) == 2:
+            print("** attribute name missing **")
+            return False
+
+        elif (f"{args[0]}, {args[1]}") not in obj.keys():
+            print("** no instance found **")
+            return False
+
+        elif len(args) == 3:
+            try:
+                type(eval(args[2])) != dict
+            except NameError:
+                print("** value missing **")
+                return False
+
+        elif len(args) == 4:
+            objO = obj[f"{args[0]}.{args[1]}"]
+
+            if args[2] in objO.__class__.__dict__.keys():
+                valtype = type(objO.__class__.__dict__[args[2]])
+                objO.__dict__[args[2]] = valtype(args[3])
+
+            else:
+                objO.__dict__[args[2]] = args[3]
+
+        elif type(eval(args[2])) == dict:
+            objO = obj[f"{args[0]}.{args[1]}"]
+
+            for k, v in eval(args[2]).items():
+                if (k in objO.__class__.__dict__.keys() and
+                        type(objO.__class__.__dict__[k]) in {str, int, float}):
+                    valtype = type(objO.__class__.__dict__[k])
+                    objO.__dict__[k] = valtype(v)
+                else:
+                    objO.__dict__[k] = v
+
+        storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
