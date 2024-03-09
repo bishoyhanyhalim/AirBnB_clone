@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""Module that contains the entry point of the command interpreter."""
+"""Module that contains the entry point of the command interpreter"""
 import cmd
 import sys
 from models import storage
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
-    """Command interpreter class."""
+    """Command interpreter class for AirBnB"""
 
     prompt = "(hbnb) "
 
@@ -15,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """Exit the program using EOF (Ctrl-D)"""
+        """Exit the program using EOF this mean ctr & D"""
         print()
         return True
 

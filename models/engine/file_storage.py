@@ -1,15 +1,18 @@
 #!/usr/bin/python3
 import json
 from models.base_model import BaseModel
+from models.user import User
+
 
 class FileStorage:
+    """this is a storage class that stor all data"""
     __file_path = "file.json"
-    __objects={}
-    
-    class_mapping = {
-        'BaseModel': BaseModel
-    }
+    __objects = {}
 
+    class_mapping = {
+        'BaseModel': BaseModel,
+        'User': User
+    }
 
     def all(self):
         return FileStorage.__objects
