@@ -11,7 +11,6 @@ import uuid
 class test_basemodel(TestCase):
     """Test class of basemodel."""
 
-
     def setUp(self):
         """Set up for every test."""
         pass
@@ -20,20 +19,21 @@ class test_basemodel(TestCase):
         """Tear down after each test."""
         try:
             os.remove('file.json')
-        except:
+        except FileNotFoundError:
             pass
 
     def test_default(self):
         """Creating an instance with default values."""
         instance = BaseModel()
-        self.assertEqual(type(instance), BaseModel)\
-    
+        self.assertEqual(type(instance), BaseModel)
+
     def test_kwargs(self):
+        """Tests creating a new instance using to_dict."""
         instance = BaseModel()
         inst_dict = instance.to_dict()
         new = BaseModel(**inst_dict)
         self.assertFalse(new is instance)
-    
+
     def test_kwargs_int(self):
         """Creating instance using invalid input."""
         instance = BaseModel()
@@ -57,6 +57,7 @@ class test_basemodel(TestCase):
         t_dict = {'name', 'test'}
         with self.assertRaises(KeyError):
             new = BaseModel(**t_dict)
-    
+
+
 if __name__ == '__main__':
     unittest.main()
