@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
-from models.base_model import BaseModel
 from models.user import User
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -15,23 +15,26 @@ class FileStorage:
     }
 
     def all(self):
+        """all func for storage"""
         return FileStorage.__objects
 
-    def new(self, obj):
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj
-
     def save(self):
+        """save func for storage"""
         objects = {}
         for name, obj in FileStorage.__objects.items():
             objects[name] = obj.to_dict()
         with open(FileStorage.__file_path, 'w') as fl:
             json.dump(objects, fl)
 
-    def reload(self):
+    def new(self, obj):
+        """new func for storage"""
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        FileStorage.__objects[key] = obj
 
+    def reload(self):
+        """reload func for storage"""
         try:
-            with open(FileStorage.__file_path, 'r') as fl:
+            with open(FileStorage.__file_path) as fl:
                 objects = json.load(fl)
                 for key, object_info in objects.items():
                     cls_name, id = key.split('.')
@@ -40,4 +43,4 @@ class FileStorage:
                         instance = cls(**object_info)
                     FileStorage.__objects[key] = instance
         except FileNotFoundError:
-            pass
+            return
