@@ -83,6 +83,7 @@ class HBNBCommand(cmd.Cmd):
         print(print_f)
 
     def do_update(self, arg):
+        """this func to make update of id"""
         args = arg.split()
         obj = storage.all()
 
@@ -102,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return False
 
-        elif (f"{args[0]}, {args[1]}") not in obj.keys():
+        elif (f"{args[0]}.{args[1]}") not in obj.keys():
             print("** no instance found **")
             return False
 
@@ -114,23 +115,25 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         elif len(args) == 4:
+            """for update value"""
             objO = obj[f"{args[0]}.{args[1]}"]
 
             if args[2] in objO.__class__.__dict__.keys():
-                valtype = type(objO.__class__.__dict__[args[2]])
-                objO.__dict__[args[2]] = valtype(args[3])
+                type_value = type(objO.__class__.__dict__[args[2]])
+                objO.__dict__[args[2]] = type_value(args[3])
 
             else:
                 objO.__dict__[args[2]] = args[3]
 
         elif type(eval(args[2])) == dict:
+            """for update value"""
             objO = obj[f"{args[0]}.{args[1]}"]
 
             for k, v in eval(args[2]).items():
                 if (k in objO.__class__.__dict__.keys() and
                         type(objO.__class__.__dict__[k]) in {str, int, float}):
-                    valtype = type(objO.__class__.__dict__[k])
-                    objO.__dict__[k] = valtype(v)
+                    type_value = type(objO.__class__.__dict__[k])
+                    objO.__dict__[k] = type_value(v)
                 else:
                     objO.__dict__[k] = v
 
