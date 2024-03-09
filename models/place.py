@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-"""This is a Place class"""
+"""This is a Place class."""
 
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """Place class for project"""
+    """Place class for project."""
 
     city_id = ""
     user_id = ""

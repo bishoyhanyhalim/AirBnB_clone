@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Base_model test."""
+"""Base_model test module."""
 from models.base_model import BaseModel
 from unittest import TestCase
 import unittest
@@ -54,6 +54,7 @@ class test_basemodel(TestCase):
         self.assertEqual(type(new.id), str)
 
     def test_kwargs_one(self):
+        """Test kwargs with one invalid key."""
         t_dict = {'name', 'test'}
         with self.assertRaises(KeyError):
             new = BaseModel(**t_dict)

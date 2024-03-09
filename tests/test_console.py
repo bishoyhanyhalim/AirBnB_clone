@@ -9,32 +9,32 @@ from unittest.mock import patch
 
 
 class TestHBNBCommand(unittest.TestCase):
-    """this is test for the project"""
+    """This is test for the project."""
 
     def test_quit(self):
-        """Test quit command"""
+        """Test quit command."""
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.assertTrue(HBNBCommand().onecmd("quit"))
 
     def test_EOF(self):
-        """Test EOF command"""
+        """Test EOF command."""
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
     def test_emptyline(self):
-        """Test empty line input"""
+        """Test empty line input."""
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             self.assertIsNone(HBNBCommand().onecmd(""))
 
     def test_create_missing_class_name(self):
-        """Test create with no class name"""
+        """Test create with no class name."""
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             HBNBCommand().onecmd("create")
             assert mock_stdout.getvalue() == "** class name missing **\n"
             self.assertEqual(True, True)
 
     def test_create_invalid_class(self):
-        """Test create with invalid class name"""
+        """Test create with invalid class name."""
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
             HBNBCommand().onecmd("create MyClass")
             assert mock_stdout.getvalue() == "** class doesn't exist **\n"
