@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Module that contains the entry point of the command interpreter."""
 import cmd
-from models.base_model import BaseModel
-from models import storage
+import sys
+from models.__init__ import storage
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class."""
@@ -66,12 +66,21 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        args = arg.split()
-        if args[0] not in storage.class_mapping:
-            print("** class doesn't exist **")
-        els
+        print_f = [] 
+        if not arg:
+            for name, obj in storage.all().items():
+                print_f.append(str(obj))
+        else:
+            args = arg.split()
+            if args[0] not in storage.class_mapping:
+                print("** class doesn't exist **")
+                return
+            for name, obj in storage.all().items():
+                if name.split('.')[0]  == args[0]:
+                    print_f.append(str(obj))
 
-        
+        print(print_f)
+     
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
