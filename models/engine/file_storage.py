@@ -16,7 +16,12 @@ class FileStorage:
 
     class_mapping = {
         'BaseModel': BaseModel,
-        'User': User
+        'User': User,
+        'State': State,
+        'City': City,
+        'Place': Place,
+        'Amenity': Amenity,
+        'Review': Review
     }
 
     def all(self):
