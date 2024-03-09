@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""this is a state class"""
+"""This is a state class"""
 
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """state class for project"""
+    """State class for project"""
 
     name = ""

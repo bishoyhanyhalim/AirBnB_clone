@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""this is a Review class"""
+"""This is a Review class"""
 
 from models.base_model import BaseModel
 
