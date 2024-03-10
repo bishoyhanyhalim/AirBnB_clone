@@ -37,7 +37,6 @@ class HBNBCommand(cmd.Cmd):
             print(new_obj.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance."""
         args = arg.split()
         if not args:
             print("** class name missing **")
@@ -53,7 +52,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id."""
         args = arg.split()
         if not args:
             print("** class name missing **")
@@ -70,7 +68,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        """Prints all string representation of all instances."""
         print_f = []
         if not arg:
             for name, obj in storage.all().items():
@@ -87,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
         print(print_f)
 
     def do_update(self, arg):
-        """This func to make update of id."""
+        """this func to make update of id"""
         args = arg.split()
         obj = storage.all()
 
@@ -119,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
         elif len(args) == 4:
-            """For update value"""
+            """for update value"""
             objO = obj[f"{args[0]}.{args[1]}"]
 
             if args[2] in objO.__class__.__dict__.keys():
@@ -130,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
                 objO.__dict__[args[2]] = args[3]
 
         elif type(eval(args[2])) == dict:
-            """For update value"""
+            """for update value"""
             objO = obj[f"{args[0]}.{args[1]}"]
 
             for k, v in eval(args[2]).items():
