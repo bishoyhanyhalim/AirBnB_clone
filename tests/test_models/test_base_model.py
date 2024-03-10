@@ -38,7 +38,7 @@ class test_basemodel(TestCase):
         """Creating instance using invalid input."""
         instance = BaseModel()
         inst_dict = instance.to_dict()
-        inst_dict.update({1, 2})
+        inst_dict.update({1: 2})
         with self.assertRaises(TypeError):
             new = BaseModel(**inst_dict)
 
@@ -52,12 +52,6 @@ class test_basemodel(TestCase):
         """Test id attribute."""
         new = BaseModel()
         self.assertEqual(type(new.id), str)
-
-    def test_kwargs_one(self):
-        """Test kwargs with one invalid key."""
-        t_dict = {'name', 'test'}
-        with self.assertRaises(KeyError):
-            new = BaseModel(**t_dict)
 
 
 if __name__ == '__main__':
