@@ -60,10 +60,19 @@ class test_Filestorage(TestCase):
         self.assertEqual(storage.reload(), None)
 
     def test_key_format(self):
+        """Test for key format."""
         new = BaseModel()
         new_id = new.to_dict()['id']
         for key in storage.all().keys():
             self.assertEqual(key, f"{new.__class__.__name__}.{new_id}")
+
+    def test_objects_type(self):
+        """Checks if __objjects is a dict."""
+        self.assertEqual(type(storage.all()), dict)
+
+    def test_created_storage_var(self):
+        """Storage object created"""
+        self.assertEqual(type(storage), FileStorage)
 
 
 if __name__ == "__main__":
