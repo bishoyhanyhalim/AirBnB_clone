@@ -83,16 +83,6 @@ class HBNBCommand(cmd.Cmd):
 
         print(print_f)
 
-    def do_count(self, arg):
-        """this is count class for project"""
-        args = arg.split()
-        counting = 0
-
-        for total in storage.all().values():
-            if args[0] == total.__class__.__name__:
-                counting += 1
-        print(counting)
-
     def do_update(self, arg):
         """this func to make update of id"""
         args = arg.split()
