@@ -74,6 +74,17 @@ class test_Filestorage(TestCase):
         """Storage object created"""
         self.assertEqual(type(storage), FileStorage)
 
+    def test_save(self):
+        """Test for save method."""
+        new = BaseModel()
+        storage.save()
+        self.assertTrue(os.path.exists('file.json'))
+
+    def test_all(self):
+        """Test for all method."""
+        allobj = storage.all()
+        self.assertIsInstance(allobj, dict)
+
 
 if __name__ == "__main__":
     unittest.main()
