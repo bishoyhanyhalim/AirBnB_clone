@@ -22,8 +22,9 @@ class test_Filestorage(TestCase):
             os.remove("file.json")
         except FileNotFoundError:
             pass
+        storage._FileStorage__objects.clear()
 
-    def test_empty_obj_list(self):
+    def test_objects_list_empty(self):
         """Initially empty __objects list."""
         self.assertEqual(len(storage.all()), 0)
 
@@ -84,6 +85,11 @@ class test_Filestorage(TestCase):
         """Test for all method."""
         allobj = storage.all()
         self.assertIsInstance(allobj, dict)
+
+    def test_base_model_init(self):
+        """Json file not created on basemodel init."""
+        new = BaseModel()
+        self.assertFalse(os.path.exists('file.json'))
 
 
 if __name__ == "__main__":
