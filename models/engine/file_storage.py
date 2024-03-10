@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""FileStorage class module."""
 import json
 from models.user import User
 from models.base_model import BaseModel
@@ -10,7 +11,7 @@ from models.review import Review
 
 
 class FileStorage:
-    """this is a storage class that stor all data"""
+    """This is a storage class that stor all data."""
     __file_path = "file.json"
     __objects = {}
 
@@ -25,11 +26,11 @@ class FileStorage:
     }
 
     def all(self):
-        """all func for storage"""
+        """All func for storage."""
         return FileStorage.__objects
 
     def save(self):
-        """save func for storage"""
+        """Save func for storage."""
         objects = {}
         for name, obj in FileStorage.__objects.items():
             objects[name] = obj.to_dict()
@@ -37,12 +38,12 @@ class FileStorage:
             json.dump(objects, fl)
 
     def new(self, obj):
-        """new func for storage"""
+        """New func for storage."""
         key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key] = obj
 
     def reload(self):
-        """reload func for storage"""
+        """Reload func for storage."""
         try:
             with open(FileStorage.__file_path) as fl:
                 objects = json.load(fl)
