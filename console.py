@@ -9,7 +9,7 @@ from models.user import User
 class HBNBCommand(cmd.Cmd):
     """Command interpreter class for AirBnB"""
 
-    prompt = "(hbnb) "
+    prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
