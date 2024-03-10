@@ -56,7 +56,7 @@ class test_Filestorage(TestCase):
         with self.assertRaises(ValueError):
             storage.reload()
 
-    def test_reload_not_existing(self):
+    def test_reload_non_existing(self):
         """Test reloading from non-existent file."""
         self.assertEqual(storage.reload(), None)
 
@@ -101,6 +101,10 @@ class test_Filestorage(TestCase):
         new = BaseModel()
         new.save()
         self.assertTrue(os.path.exists('file.json'))
+
+    def test_path_type(self):
+        """Ensure file path is a string."""
+        self.assertEqual(type(storage._FileStorage__file_path), str)
 
 
 if __name__ == "__main__":
