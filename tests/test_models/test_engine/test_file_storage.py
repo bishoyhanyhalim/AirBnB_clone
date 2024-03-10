@@ -96,6 +96,12 @@ class test_Filestorage(TestCase):
         new = BaseModel()
         self.assertIn(f"{new.__class__.__name__}.{new.id}", storage.all())
 
+    def test_base_model_save(self):
+        """Storage save using basemodel save."""
+        new = BaseModel()
+        new.save()
+        self.assertTrue(os.path.exists('file.json'))
+
 
 if __name__ == "__main__":
     unittest.main()
