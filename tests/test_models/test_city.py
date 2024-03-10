@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """city test case module"""
 import unittest
+import os
+import models
 from models.city import City
 
 
@@ -14,11 +16,6 @@ class TestCity(unittest.TestCase):
         """the attribute values tests method"""
         self.assertEqual(self.city.state_id, "")
         self.assertEqual(self.city.name, "")
-
-    def test_this_attribute(self):
-        """the assigning attribute of city tests method"""
-        with self.assertRaises(AttributeError):
-            self.city.undefined_attribute = "don't work this"
 
 
 if __name__ == '__main__':

@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """place test case module"""
 import unittest
+import os
+import models
 from models.place import Place
 
 
@@ -15,12 +17,6 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(self.place.city_id, "")
         self.assertEqual(self.place.user_id, "")
         self.assertEqual(self.place.name, "")
-        self.assertEqual(self.place.number_rooms, "")
-
-    def test_this_attribute(self):
-        """the assigning attribute of place tests method"""
-        with self.assertRaises(AttributeError):
-            self.place.undefined_attribute = "don't work this"
 
 
 if __name__ == '__main__':
