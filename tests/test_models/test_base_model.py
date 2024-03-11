@@ -75,6 +75,7 @@ class test_basemodel(TestCase):
         obj = BaseModel()
         dicti = obj.to_dict()
         self.assertIsInstance(dicti, dict)
+        self.assertEqual(dicti, obj.to_dict)
 
     def test_created_at(self):
         """Created at test."""
