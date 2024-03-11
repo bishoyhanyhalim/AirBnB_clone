@@ -91,8 +91,8 @@ class test_basemodel(TestCase):
         """Test updated at"""
         new = BaseModel()
         self.assertEqual(type(new.updated_at), datetime.datetime)
-        new2 = new.to_dict()
-        new = BaseModel(**new2)
+        new.test = 'test'
+        new.save()
         self.assertFalse(new.created_at == new.updated_at)
 
     def test_kwargs_one(self):
