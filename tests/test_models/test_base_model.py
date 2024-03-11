@@ -92,6 +92,7 @@ class test_basemodel(TestCase):
         new = BaseModel()
         self.assertEqual(type(new.updated_at), datetime.datetime)
         new2 = new.to_dict()
+        time.sleep(1)
         new = BaseModel(**new2)
         self.assertFalse(new.created_at == new.updated_at)
 
