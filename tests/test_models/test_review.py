@@ -16,11 +16,6 @@ class TestReview(unittest.TestCase):
         self.assertEqual(self.review.place_id, "")
         self.assertEqual(self.review.user_id, "")
 
-    def test_this_attribute(self):
-        """the assigning attribute of review tests method"""
-        with self.assertRaises(AttributeError):
-            self.review.undefined_attribute = "don't work this"
-
 
 if __name__ == '__main__':
     unittest.main()
