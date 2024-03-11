@@ -95,6 +95,5 @@ class test_basemodel(TestCase):
         self.assertEqual(new5.Name, 'test')
 
 
-
 if __name__ == '__main__':
     unittest.main()
