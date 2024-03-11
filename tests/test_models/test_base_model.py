@@ -69,6 +69,12 @@ class test_basemodel(TestCase):
         self.assertEqual(str(new), '[{}] ({}) {}'.
                          format(new.__class__.__name__, new.id, new.__dict__))
 
+    def test_to_dict(self):
+        """To_dict test."""
+        obj = BaseModel()
+        dicti = obj.to_dict()
+        self.assertEqual(obj.to_dict(), dicti)
+
     def test_created_at(self):
         """Created at test."""
         new = BaseModel()
