@@ -88,6 +88,13 @@ class test_basemodel(TestCase):
         new = BaseModel(**new2)
         self.assertFalse(new.created_at == new.updated_at)
 
+    def test_kwargs_one(self):
+        """Kwargs test."""
+        dicti = {'Name': 'test'}
+        new5 = BaseModel(**dicti)
+        self.assertEqual(new5.Name, 'test')
+
+
 
 if __name__ == '__main__':
     unittest.main()
