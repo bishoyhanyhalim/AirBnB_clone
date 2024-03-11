@@ -11,6 +11,9 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key != '__class__':
+                    if key == 'id':
+                        if not isinstance(value, str):
+                            raise KeyError
                     if key in ['updated_at', 'created_at']:
                         setattr(self, key, datetime.strptime(
                             value, "%Y-%m-%dT%H:%M:%S.%f"))

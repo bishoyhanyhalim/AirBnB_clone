@@ -90,9 +90,9 @@ class test_basemodel(TestCase):
 
     def test_kwargs_one(self):
         """Kwargs test."""
-        dicti = {'Name': 'test'}
-        new5 = BaseModel(**dicti)
-        self.assertEqual(new5.Name, 'test')
+        dicti = {'id': 123}
+        with self.assertRaises(KeyError):
+            new5 = BaseModel(**dicti)
 
 
 if __name__ == '__main__':
