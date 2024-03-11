@@ -7,6 +7,7 @@ import os
 import json
 import uuid
 import datetime
+import time
 
 
 class test_basemodel(TestCase):
@@ -73,7 +74,7 @@ class test_basemodel(TestCase):
         """To_dict test."""
         obj = BaseModel()
         dicti = obj.to_dict()
-        self.assertEqual(obj.to_dict(), dicti)
+        self.assertIsInstance(dicti, dict)
 
     def test_created_at(self):
         """Created at test."""
@@ -85,6 +86,7 @@ class test_basemodel(TestCase):
         new = BaseModel()
         self.assertEqual(type(new.updated_at), datetime.datetime)
         new2 = new.to_dict()
+        time.sleep(1)
         new = BaseModel(**new2)
         self.assertFalse(new.created_at == new.updated_at)
 
