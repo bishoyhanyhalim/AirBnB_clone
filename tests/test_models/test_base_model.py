@@ -53,6 +53,20 @@ class test_basemodel(TestCase):
         new = BaseModel()
         self.assertEqual(type(new.id), str)
 
+    def test_save(self):
+        """Save testing."""
+        new = BaseModel()
+        new.save()
+        key = f"{new.__class__.__name__}.{new.id}"
+        with open('file.json', 'r') as fl:
+            load = json.load(fl)
+            self.assertEqual(load[key], new.to_dict())
+
+    def test_str(self):
+        new = BaseModel()
+        self.assertEqual(str(new), '[{}] ({}) {}'.
+                         format(new.__class__.__name__, new.id, new.__dict__))
+
 
 if __name__ == '__main__':
     unittest.main()
