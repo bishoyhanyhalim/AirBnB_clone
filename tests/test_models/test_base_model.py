@@ -89,9 +89,12 @@ class test_basemodel(TestCase):
 
     def test_updated_at(self):
         """Test updated at"""
+        dict1 = {}
         new = BaseModel()
         self.assertEqual(type(new.updated_at), datetime.datetime)
-        new.test = 'test'
+        dict1 = new.to_dict()
+        dict1['test'] = 'test'
+        new = BaseModel(**dict1)
         new.save()
         self.assertFalse(new.created_at == new.updated_at)
 
