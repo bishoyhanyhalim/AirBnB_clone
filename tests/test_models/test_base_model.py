@@ -6,6 +6,7 @@ import unittest
 import os
 import json
 import uuid
+import datetime
 
 
 class test_basemodel(TestCase):
@@ -63,9 +64,23 @@ class test_basemodel(TestCase):
             self.assertEqual(load[key], new.to_dict())
 
     def test_str(self):
+        """Str method test."""
         new = BaseModel()
         self.assertEqual(str(new), '[{}] ({}) {}'.
                          format(new.__class__.__name__, new.id, new.__dict__))
+
+    def test_created_at(self):
+        """Created at test."""
+        new = BaseModel()
+        self.assertEqual(type(new.created_at), datetime.datetime)
+
+    def test_updated_at(self):
+        """Test updated at"""
+        new = BaseModel()
+        self.assertEqual(type(new.updated_at), datetime.datetime)
+        new2 = new.to_dict()
+        new = BaseModel(**new2)
+        self.assertFalse(new.created_at == new.updated_at)
 
 
 if __name__ == '__main__':
