@@ -75,13 +75,12 @@ class test_basemodel(TestCase):
         obj = BaseModel()
         dicti = obj.to_dict()
         self.assertIsInstance(dicti, dict)
-        self.assertEqual(dicti, obj.to_dict)
 
     def test_to_dict2(self):
         """To_dict test."""
         obj = BaseModel()
         dicti = obj.to_dict()
-        self.assertEqual(dicti, obj.to_dict)
+        self.assertEqual(obj.to_dict(), dicti)
 
     def test_created_at(self):
         """Created at test."""
