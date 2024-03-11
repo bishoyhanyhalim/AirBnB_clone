@@ -77,9 +77,10 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in storage.class_mapping:
                 print("** class doesn't exist **")
                 return
-            for name, obj in storage.all().items():
-                if name.split('.')[0] == args[0]:
-                    print_f.append(str(obj))
+            else:
+                for name, obj in storage.all().items():
+                    if name.split('.')[0] == args[0]:
+                        print_f.append(str(obj))
 
         print(print_f)
 
